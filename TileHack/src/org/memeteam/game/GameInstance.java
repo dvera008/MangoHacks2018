@@ -99,8 +99,14 @@ public class GameInstance {
 		}
 
 		// Update for focus point
-		// find x center
-		int center = (int) (GUI.tileSize.getWidth());
+		// find center
+		int centerx = (int) (GUI.tileSize.getWidth() * (1 / 2.0 + focusPoint.getX()));
+		int centery = (int) (GUI.tileSize.getHeight() * (1 / 2.0 + focusPoint.getY()));
+		// use center to calc gamepanel location
+		int posx = (GUI.gamepanel.getWidth() / 2) - centerx;
+		int posy = (GUI.gamepanel.getHeight() / 2) - centery;
+		// update position
+		newBoard.setLocation(posx, posy);
 
 		// Destroy old board
 		GUI.gamepanel.remove(GUI.boardpanel);

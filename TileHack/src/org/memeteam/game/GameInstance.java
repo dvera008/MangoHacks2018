@@ -112,6 +112,8 @@ public class GameInstance {
 		GUI.gamepanel.remove(GUI.boardpanel);
 
 		// Add new board
+		newBoard.setVisible(true);
+		GUI.boardpanel=newBoard;
 		GUI.gamepanel.add(newBoard);
 
 	}

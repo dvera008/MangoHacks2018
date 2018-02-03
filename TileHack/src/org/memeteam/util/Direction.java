@@ -26,7 +26,7 @@ public enum Direction {
 	 * @param d
 	 *            The direction to move in
 	 */
-	public void navigate(Point p, Direction d) {
+	public static final void navigate(Point p, Direction d) {
 		switch (d) {
 		case NORTH:
 			p.setLocation(p.getX(), p.getY() + 1);
@@ -53,19 +53,19 @@ public enum Direction {
 	 * @param amount
 	 *            The number of spaces to move
 	 */
-	public void navigate(Point p, Direction d, int amount) {
+	public static final void navigate(Point p, Direction d, int amount) {
 		switch (d) {
 		case NORTH:
-			p.setLocation(p.getX(), p.getY() + amount);
+			p.translate(0, 1);
 			break;
 		case SOUTH:
-			p.setLocation(p.getX(), p.getY() - amount);
+			p.translate(0, -1);
 			break;
 		case EAST:
-			p.setLocation(p.getX() + amount, p.getY());
+			p.translate(1, 0);
 			break;
 		case WEST:
-			p.setLocation(p.getX() - amount, p.getY());
+			p.translate(-1, 0);
 			break;
 		}
 	}

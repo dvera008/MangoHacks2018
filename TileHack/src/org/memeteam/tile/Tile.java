@@ -8,7 +8,7 @@ import org.memeteam.util.Direction;
 import org.memeteam.util.Graphics;
 
 public class Tile {
-	private int tileID;
+	private int tileID; //Valid ids so far include 0-15
 	private Point tileLocation;
 	private boolean doors[];
 	private ImageIcon tileGraphic;

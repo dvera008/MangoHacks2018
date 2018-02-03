@@ -86,4 +86,7 @@ public class Tile {
 		return tileLocation;
 	}
 
+	public ImageIcon getImage() {
+		return tileGraphic;
+	}
 }

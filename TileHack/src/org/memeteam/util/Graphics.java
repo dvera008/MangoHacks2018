@@ -11,9 +11,18 @@ import java.net.URL;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
+import org.memeteam.game.GUI;
+
 public final class Graphics {
+	/**
+	 * Retrieves graphics for the using id number
+	 * @param id
+	 * @return ImageIcon of tile
+	 */
 	public static final ImageIcon getTileGraphics(int id) {
-		return getImg("" + id, "png", "org/memeteam/resources/tile");
+		ImageIcon icon = getImg("" + id, "png", "org/memeteam/resources/tile");
+		return resizeImage(icon, icon.getIconWidth(), icon.getIconHeight());
+
 	}
 
 	public static final ImageIcon getSprite(int id) {
@@ -62,17 +71,17 @@ public final class Graphics {
 	 * @param height
 	 * @return The resized image
 	 */
-	public Icon resizeImage(Icon i, int width, int height) {
+	public static ImageIcon resizeImage(Icon i, int width, int height) {
 		Image image;
 		image = toImage(i).getScaledInstance(width, height, Image.SCALE_SMOOTH);
 		return toImageIcon(image);
 	}
 
-	private ImageIcon toImageIcon(Image i) {
+	private static ImageIcon toImageIcon(Image i) {
 		return new ImageIcon(i);
 	}
 
-	public Image toImage(Icon icon) {
+	public static Image toImage(Icon icon) {
 		if (icon instanceof ImageIcon) {
 			return ((ImageIcon) icon).getImage();
 		} else {
@@ -92,7 +101,7 @@ public final class Graphics {
 	 *            The amount to rotate by
 	 * @return The rotated image
 	 */
-	public ImageIcon rotate(ImageIcon in, double degrees) {
+	public static ImageIcon rotate(ImageIcon in, double degrees) {
 		return toImageIcon(rotate(getBufferedImage(in), degrees));
 	}
 
@@ -121,7 +130,7 @@ public final class Graphics {
 		return result;
 	}
 
-	private BufferedImage getBufferedImage(ImageIcon i) {
+	private static BufferedImage getBufferedImage(ImageIcon i) {
 		BufferedImage im = new BufferedImage(i.getIconWidth(), i.getIconHeight(), BufferedImage.TYPE_INT_RGB);
 		Graphics2D g = im.createGraphics();
 		i.paintIcon(null, g, 0, 0);

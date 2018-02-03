@@ -8,7 +8,7 @@ import org.memeteam.util.Direction;
 import org.memeteam.util.Graphics;
 
 public class Tile {
-	private int tileId;
+	private int tileID;
 	private Point tileLocation;
 	private boolean doors[];
 	private ImageIcon tileGraphic;
@@ -22,7 +22,7 @@ public class Tile {
 	 *            The state of each door using DirectionIDs for indexes.
 	 */
 	public Tile(int id, Point location, boolean[] doors) {
-		tileId = id;
+		tileID = id;
 		tileLocation = location;
 		Graphics.getTileGraphics(id);
 	}
@@ -44,13 +44,44 @@ public class Tile {
 		}
 		tileGraphic = Graphics.rotateGraphics(tileGraphic, amount);
 	}
+
 	/**
 	 * Checks if a given door is open
-	 * @param d The direction of the door to check
+	 * 
+	 * @param d
+	 *            The direction of the door to check
 	 * @return
 	 */
 	public boolean isOpen(Direction d) {
 		return doors[d.getID()];
+	}
+
+	/**
+	 * Sets the state of a door
+	 * 
+	 * @param d
+	 *            Direction of the door to change
+	 * @param state
+	 *            State to change the door to
+	 */
+	public void setDoorState(Direction d, boolean state) {
+		doors[d.getID()] = state;
+	}
+
+	/**
+	 * Returns the tilesprite ID of a given tile
+	 * 
+	 * @return
+	 */
+	public int getID() {
+		return tileID;
+	}
+/**
+ * Returns the location of a given tile
+ * @return
+ */
+	public Point getLocation() {
+		return tileLocation;
 	}
 
 }

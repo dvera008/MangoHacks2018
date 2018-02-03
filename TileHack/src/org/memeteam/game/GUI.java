@@ -38,7 +38,6 @@ public class GUI {
 		boardpanel = new JPanel();
 		boardpanel.setLayout(null);
 		boardpanel.setSize(0, 0);
-
 		boardpanel.setBackground(Color.BLACK);
 		gamepanel.add(boardpanel);
 

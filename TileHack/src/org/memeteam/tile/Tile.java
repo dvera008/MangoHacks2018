@@ -8,7 +8,7 @@ import org.memeteam.util.Direction;
 import org.memeteam.util.Graphics;
 
 public class Tile {
-	private int tileID; //Valid ids so far include 0-15
+	private int tileID; // Valid ids so far include 0-15
 	private Point tileLocation;
 	private boolean doors[];
 	private ImageIcon tileGraphic;
@@ -21,10 +21,11 @@ public class Tile {
 	 * @param doors
 	 *            The state of each door using DirectionIDs for indexes.
 	 */
-	public Tile(int id, Point location, boolean[] doors) {
+	public Tile(int id, Point location) {
 		tileID = id;
 		tileLocation = location;
 		tileGraphic = Graphics.getTileGraphics(id);
+		doors = initDoors();
 	}
 
 	/**
@@ -88,5 +89,108 @@ public class Tile {
 
 	public ImageIcon getImage() {
 		return tileGraphic;
+	}
+
+	private boolean[] initDoors() {
+		boolean[] out = new boolean[4];
+		switch (tileID) {
+		case 0:
+			out[0] = false;
+			out[1] = true;
+			out[2] = false;
+			out[3] = true;
+			break;
+		case 1:
+			out[0] = true;
+			out[1] = true;
+			out[2] = true;
+			out[3] = true;
+			break;
+		case 2:
+			out[0] = true;
+			out[1] = true;
+			out[2] = true;
+			out[3] = true;
+			break;
+		case 3:
+			out[0] = true;
+			out[1] = false;
+			out[2] = true;
+			out[3] = false;
+			break;
+		case 4:
+			out[0] = true;
+			out[1] = true;
+			out[2] = true;
+			out[3] = true;
+			break;
+		case 5:
+			out[0] = true;
+			out[1] = false;
+			out[2] = false;
+			out[3] = false;
+			break;
+		case 6:
+			out[0] = true;
+			out[1] = true;
+			out[2] = false;
+			out[3] = false;
+			break;
+		case 7:
+			out[0] = true;
+			out[1] = false;
+			out[2] = true;
+			out[3] = false;
+			break;
+		case 8:
+			out[0] = true;
+			out[1] = false;
+			out[2] = false;
+			out[3] = false;
+			break;
+		case 9:
+			out[0] = true;
+			out[1] = false;
+			out[2] = false;
+			out[3] = true;
+			break;
+		case 10:
+			out[0] = false;
+			out[1] = true;
+			out[2] = true;
+			out[3] = false;
+			break;
+		case 11:
+			out[0] = false;
+			out[1] = false;
+			out[2] = true;
+			out[3] = true;
+			break;
+		case 12:
+			out[0] = true;
+			out[1] = false;
+			out[2] = true;
+			out[3] = true;
+			break;
+		case 13:
+			out[0] = true;
+			out[1] = false;
+			out[2] = false;
+			out[3] = false;
+			break;
+		case 14:
+			out[0] = true;
+			out[1] = true;
+			out[2] = false;
+			out[3] = false;
+			break;
+		case 15:
+			out[0] = true;
+			out[1] = false;
+			out[2] = true;
+			out[3] = false;
+			break;
+		}
+		return out;
 	}
 }

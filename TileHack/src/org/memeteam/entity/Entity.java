@@ -1,5 +1,7 @@
 package org.memeteam.entity;
 
-public interface Entity {
+import javax.swing.ImageIcon;
 
+public interface Entity {
+	public ImageIcon getGraphics();
 }

@@ -30,4 +30,22 @@ public class Tile {
 		Graphics.getTileGraphics(id);
 	}
 
+	/**
+	 * Rotates a Tile clockwise
+	 * 
+	 * @param i
+	 *            Amount of 90 degree rotations
+	 */
+	public void rotateTile(int amount) {
+		amount = amount < 0 ? -(amount % 4) : amount % 4;
+		for (int n = 0; n < amount; n++) {
+			boolean temp = doors[doors.length - 1];
+			for (int i = doors.length - 1; i > 0; i++) {
+				doors[i] = doors[i - 1];
+			}
+			doors[0] = temp;
+		}
+		tileGraphic = Graphics.rotateGraphics(tileGraphic, amount);
+	}
+
 }

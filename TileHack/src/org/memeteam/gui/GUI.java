@@ -10,6 +10,7 @@ import org.memeteam.tile.Tile;
 
 public class GUI {
 	public GUI(Map<Point, Tile> gameboard) {
+		final Dimension tileSize = new Dimension(50, 50);
 		JFrame frame = new JFrame("TileHack");
 		frame.getContentPane().setPreferredSize(new Dimension(600, 600));
 		frame.pack();

@@ -6,19 +6,37 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.Transparency;
 import java.awt.image.BufferedImage;
+import java.net.URL;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
-public class Graphics {
+public final class Graphics {
 	public static final ImageIcon getTileGraphics(int id) {
-		// TODO: implement tilesheet
-		return null;
+		return getImg("" + id, "png", "org/memeteam/resources/tile");
 	}
 
 	public static final ImageIcon getSprite(int id) {
 		// TODO: implement spritesheet
 		return null;
+	}
+
+	/**
+	 * Gets an ImageIcon from a resource within the project
+	 * 
+	 * @param filename
+	 *            name of the file ex: 15
+	 * @param imagetype
+	 *            extension of the file ex: png
+	 * @param pathname
+	 *            path to the resource without the leading '/' ex:
+	 *            org/memeteam/resources/tile
+	 * @return
+	 */
+	public static final ImageIcon getImg(String filename, String imagetype, String pathname) {
+		ClassLoader cl = ClassLoader.getSystemClassLoader();
+		ImageIcon ic = new ImageIcon(cl.getResource("/" + pathname + "/" + filename + "." + imagetype.toLowerCase()));
+		return ic;
 	}
 
 	/**

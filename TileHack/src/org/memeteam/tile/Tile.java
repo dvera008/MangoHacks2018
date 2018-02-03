@@ -24,7 +24,7 @@ public class Tile {
 	public Tile(int id, Point location, boolean[] doors) {
 		tileID = id;
 		tileLocation = location;
-		Graphics.getTileGraphics(id);
+		tileGraphic = Graphics.getTileGraphics(id);
 	}
 
 	/**
@@ -76,10 +76,12 @@ public class Tile {
 	public int getID() {
 		return tileID;
 	}
-/**
- * Returns the location of a given tile
- * @return
- */
+
+	/**
+	 * Returns the location of a given tile
+	 * 
+	 * @return
+	 */
 	public Point getLocation() {
 		return tileLocation;
 	}

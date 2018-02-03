@@ -1,13 +1,15 @@
 package org.memeteam.entity;
 
+import java.awt.Point;
+
 import javax.swing.ImageIcon;
 
 import org.memeteam.util.Direction;
 
 public abstract class HostileEntity extends LivingEntity {
 
-	public HostileEntity(int[] stats) {
-		super(stats);
+	public HostileEntity(Point location, int[] stats) {
+		super(location, stats);
 		// TODO Auto-generated constructor stub
 	}
 

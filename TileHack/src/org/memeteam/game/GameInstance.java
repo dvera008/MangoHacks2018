@@ -5,10 +5,12 @@ import java.awt.Point;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import org.memeteam.entity.PlayerEntity;
 import org.memeteam.tile.Tile;
 import org.memeteam.util.Direction;
 import org.omg.PortableServer.ServantRetentionPolicyValue;
@@ -17,6 +19,8 @@ public class GameInstance {
 	private Map<Point, Tile> gameBoard;
 	private int[] bounds;
 	private Point focusPoint; // stores the location of the focused position on screen
+	static PlayerEntity player;
+	static JLabel playerIcon;
 
 	public GameInstance() {
 		init();
@@ -28,12 +32,33 @@ public class GameInstance {
 		bounds = new int[4];
 		bounds[Direction.NORTH.getID()] = 1;
 		bounds[Direction.EAST.getID()] = 1;
-		focusPoint = new Point(0, 0);
+		int[] tempStats = { 0, 0, 0 };
+		player = new PlayerEntity(new Point(0, 0), tempStats, 12);
 		new GUI();
 		placeTile(new Tile(0, new Point(0, 0)));
+		focusPoint = player.getLocation();
 		changeFocusPoint(focusPoint);
+
 		GUI.frame.setVisible(true);
 
+		movePlayer(Direction.EAST);
+
+	}
+
+	private void movePlayer(Direction d) {
+		Direction.navigate(player.getLocation(), d);
+		if (!gameBoard.containsKey(player.getLocation())) {
+			placeTile(new Tile((int) (Math.random() * 16), player.getLocation()));
+		}
+
+		updateGraphics();
+	}
+
+	private void updateGraphics() {
+		focusPoint = player.getLocation();
+		changeFocusPoint(focusPoint);
+		drawPlayer(player);
+		GUI.gamepanel.repaint();
 	}
 
 	private void placeTile(Tile t) {
@@ -79,6 +104,23 @@ public class GameInstance {
 		tile.setVisible(true);
 		GUI.boardpanel.add(tile);
 		GUI.boardpanel.repaint();
+	}
+
+	/**
+	 * Draws a playerEntity object to the center of the screen
+	 * 
+	 * @param p
+	 */
+	private void drawPlayer(PlayerEntity p) {
+		playerIcon = p.getGraphics();
+		int playerPosX, playerPosY;
+		int xorig, yorig;
+		xorig = (int) -GUI.boardpanel.getLocation().getX();
+		yorig = (int) -GUI.boardpanel.getLocation().getY();
+		playerPosX = (int) (GUI.gamepanelSize.getWidth() - GUI.playerSize.getWidth() / 2) + xorig;
+		playerPosY = (int) (GUI.gamepanelSize.getHeight() - GUI.playerSize.getHeight() / 2) + yorig;
+		playerIcon.setLocation(playerPosX, playerPosY);
+		GUI.boardpanel.setComponentZOrder(playerIcon, 0);
 	}
 
 	/**
@@ -134,6 +176,11 @@ public class GameInstance {
 		GUI.gamepanel.add(newBoard);
 	}
 
+	/**
+	 * Centers the camera on a specific point
+	 * 
+	 * @param p
+	 */
 	private void changeFocusPoint(Point p) {
 		// Update for focus point
 		// find center

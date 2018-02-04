@@ -3,13 +3,14 @@ package org.memeteam.entity;
 import java.awt.Point;
 
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 import org.memeteam.util.Direction;
 
 public abstract class Entity {
 	private Point location;
 
-	public abstract ImageIcon getGraphics();
+	public abstract JLabel getGraphics();
 
 	public Entity(Point location) {
 		this.location = location;

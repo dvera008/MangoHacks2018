@@ -29,16 +29,16 @@ public enum Direction {
 	public static final void navigate(Point p, Direction d) {
 		switch (d) {
 		case NORTH:
-			p.setLocation(p.getX(), p.getY() + 1);
+			p.translate(0, 1);
 			break;
 		case SOUTH:
-			p.setLocation(p.getX(), p.getY() - 1);
+			p.translate(0, -1);
 			break;
 		case EAST:
-			p.setLocation(p.getX() + 1, p.getY());
+			p.translate(1, 0);
 			break;
 		case WEST:
-			p.setLocation(p.getX() - 1, p.getY());
+			p.translate(-1, 0);
 			break;
 		}
 	}

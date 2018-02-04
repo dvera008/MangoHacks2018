@@ -7,6 +7,7 @@ import java.awt.Point;
 import java.util.Map;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import org.memeteam.tile.Tile;
@@ -18,6 +19,7 @@ public class GUI {
 	public static final Dimension tileSize = new Dimension(150, 150);
 	public static final Dimension frameSize = new Dimension(625, 625);
 	public static final Dimension gamepanelSize = new Dimension(500, 500);
+	public static final Dimension playerSize = new Dimension(32, 32);
 	public static final Point panelLocation = new Point((int) (frameSize.width - gamepanelSize.getWidth()), 0);
 
 	public GUI() {
@@ -46,9 +48,18 @@ public class GUI {
 		frame.setVisible(false);
 		boardpanel.setVisible(true);
 		gamepanel.setVisible(true);
+		GameInstance.playerIcon=GameInstance.player.getGraphics();
+		GameInstance.playerIcon.setLocation(0, 0);
+		GameInstance.playerIcon.setSize(GUI.playerSize);
+		GameInstance.playerIcon.setVisible(true);
+		boardpanel.add(GameInstance.playerIcon);
 	}
 
 	public JFrame getFrame() {
 		return frame;
+	}
+
+	public JPanel getBoardState() {
+		return boardpanel;
 	}
 }

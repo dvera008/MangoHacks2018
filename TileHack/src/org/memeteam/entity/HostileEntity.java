@@ -3,6 +3,7 @@ package org.memeteam.entity;
 import java.awt.Point;
 
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 import org.memeteam.util.Direction;
 
@@ -14,7 +15,7 @@ public abstract class HostileEntity extends LivingEntity {
 	}
 
 	@Override
-	public ImageIcon getGraphics() {
+	public JLabel getGraphics() {
 		// TODO Auto-generated method stub
 		return null;
 	}

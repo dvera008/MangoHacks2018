@@ -27,6 +27,16 @@ public final class Graphics {
 		ImageIcon icon = getImg("" + id, "png", "src/org/memeteam/resources/tile");
 		return resizeImage(icon, icon.getIconWidth(), icon.getIconHeight());
 
+	}/**
+	 * Retrieves graphics for the using id number
+	 * 
+	 * @param id
+	 * @return ImageIcon of player
+	 */
+	public static final ImageIcon getPlayerGraphics(int id) {
+		ImageIcon icon = getImg("" + id, "jpg", "src/org/memeteam/resources/entity/player");
+		return resizeImage(icon, icon.getIconWidth(), icon.getIconHeight());
+
 	}
 
 	public static final ImageIcon getSprite(int id) {

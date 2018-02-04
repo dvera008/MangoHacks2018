@@ -15,10 +15,10 @@ public class GUI {
 	static JFrame frame;
 	static JPanel gamepanel;
 	static JPanel boardpanel;
-	public static final Dimension tileSize = new Dimension(50, 50);
-	public static final Dimension frameSize = new Dimension(600, 600);
-	public static final Dimension gamepanelSize = new Dimension(450, 450);
-	public static final Point panelLocation = new Point(150, 0);
+	public static final Dimension tileSize = new Dimension(150, 150);
+	public static final Dimension frameSize = new Dimension(625, 625);
+	public static final Dimension gamepanelSize = new Dimension(500, 500);
+	public static final Point panelLocation = new Point((int) (frameSize.width - gamepanelSize.getWidth()), 0);
 
 	public GUI() {
 		final Dimension gameSize = new Dimension(500, 500);
@@ -26,8 +26,9 @@ public class GUI {
 		frame.getContentPane().setPreferredSize(frameSize);
 		frame.pack();
 		frame.setLayout(null);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		// throw shit in content pane here
+		// throw stuff in content pane here
 		gamepanel = new JPanel();
 		gamepanel.setSize(gamepanelSize);
 		gamepanel.setBackground(Color.DARK_GRAY);
@@ -37,21 +38,17 @@ public class GUI {
 
 		boardpanel = new JPanel();
 		boardpanel.setLayout(null);
-		boardpanel.setSize(0, 0);
-		boardpanel.setBackground(Color.BLACK);
+		boardpanel.setSize(tileSize.width, tileSize.height);
+		boardpanel.setBackground(Color.DARK_GRAY);
 		gamepanel.add(boardpanel);
 
 		// Make things visible
+		frame.setVisible(false);
 		boardpanel.setVisible(true);
 		gamepanel.setVisible(true);
-		frame.setVisible(true);
 	}
 
 	public JFrame getFrame() {
 		return frame;
-	}
-
-	public void drawTile(Tile t, Point Location) {
-		// TODO: Draw tile
 	}
 }

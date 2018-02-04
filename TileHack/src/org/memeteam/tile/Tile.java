@@ -4,6 +4,7 @@ import java.awt.Point;
 
 import javax.swing.ImageIcon;
 
+import org.memeteam.game.GUI;
 import org.memeteam.util.Direction;
 import org.memeteam.util.Graphics;
 
@@ -24,7 +25,7 @@ public class Tile {
 	public Tile(int id, Point location) {
 		tileID = id;
 		tileLocation = location;
-		tileGraphic = Graphics.getTileGraphics(id);
+		tileGraphic = Graphics.resizeImage(Graphics.getTileGraphics(id), GUI.tileSize.width, GUI.tileSize.height);
 		doors = initDoors();
 	}
 

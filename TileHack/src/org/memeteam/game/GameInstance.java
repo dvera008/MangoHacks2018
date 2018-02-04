@@ -23,30 +23,45 @@ public class GameInstance {
 	}
 
 	private void init() {
+
 		gameBoard = new HashMap<Point, Tile>();
 		bounds = new int[4];
+		bounds[Direction.NORTH.getID()] = 1;
+		bounds[Direction.EAST.getID()] = 1;
+		focusPoint = new Point(0, 0);
 		new GUI();
+		placeTile(new Tile(0, new Point(0, 0)));
+		changeFocusPoint(focusPoint);
+		GUI.frame.setVisible(true);
+
+	}
+
+	private void placeTile(Tile t) {
+		gameBoard.put(t.getLocation(), t);
+		drawTile(t);
 	}
 
 	private void drawTile(Tile t) {
 
 		// check if expansion is necessary
-		if (t.getLocation().getX() > bounds[Direction.EAST.getID()]
+		if (t.getLocation().getX() + 1 > bounds[Direction.EAST.getID()]
 				|| t.getLocation().getX() < bounds[Direction.WEST.getID()]
-				|| t.getLocation().getY() > bounds[Direction.NORTH.getID()]
+				|| t.getLocation().getY() + 1 > bounds[Direction.NORTH.getID()]
 				|| t.getLocation().getY() < bounds[Direction.SOUTH.getID()]) {
 			int[] newbounds = new int[4];
 			for (int i = 0; i < bounds.length; i++) {
 				newbounds[i] = bounds[i];
 			}
 			if (t.getLocation().getX() > bounds[Direction.EAST.getID()]) {
-				newbounds[Direction.EAST.getID()] = (int) t.getLocation().getX() - newbounds[Direction.EAST.getID()];
+				newbounds[Direction.EAST.getID()] = (int) t.getLocation().getX() + 1
+						- newbounds[Direction.EAST.getID()];
 			}
 			if (t.getLocation().getX() < bounds[Direction.WEST.getID()]) {
 				newbounds[Direction.WEST.getID()] = (int) t.getLocation().getX() - newbounds[Direction.WEST.getID()];
 			}
 			if (t.getLocation().getY() > bounds[Direction.NORTH.getID()]) {
-				newbounds[Direction.NORTH.getID()] = (int) t.getLocation().getY() - newbounds[Direction.NORTH.getID()];
+				newbounds[Direction.NORTH.getID()] = (int) t.getLocation().getY() + 1
+						- newbounds[Direction.NORTH.getID()];
 			}
 			if (t.getLocation().getY() < bounds[Direction.SOUTH.getID()]) {
 				newbounds[Direction.SOUTH.getID()] = (int) t.getLocation().getY() - newbounds[Direction.SOUTH.getID()];
@@ -63,6 +78,7 @@ public class GameInstance {
 		tile.setSize(new Dimension(t.getImage().getIconHeight(), t.getImage().getIconWidth()));
 		tile.setVisible(true);
 		GUI.boardpanel.add(tile);
+		GUI.boardpanel.repaint();
 	}
 
 	/**
@@ -95,6 +111,7 @@ public class GameInstance {
 					(int) (GUI.tileSize.getHeight() * (t.getLocation().getY() - bounds[Direction.SOUTH.getID()])));
 			tile.setSize(new Dimension(t.getImage().getIconHeight(), t.getImage().getIconWidth()));
 			tile.setVisible(true);
+			newBoard.setBackground(GUI.boardpanel.getBackground());
 			newBoard.add(tile);
 		}
 
@@ -113,8 +130,20 @@ public class GameInstance {
 
 		// Add new board
 		newBoard.setVisible(true);
-		GUI.boardpanel=newBoard;
+		GUI.boardpanel = newBoard;
 		GUI.gamepanel.add(newBoard);
+	}
 
+	private void changeFocusPoint(Point p) {
+		// Update for focus point
+		// find center
+		int centerx = (int) (GUI.tileSize.getWidth() * (1 / 2.0 + focusPoint.getX()));
+		int centery = (int) (GUI.tileSize.getHeight() * (1 / 2.0 + focusPoint.getY()));
+		// use center to calc gamepanel location
+		int posx = (GUI.gamepanel.getWidth() / 2) - centerx;
+		int posy = (GUI.gamepanel.getHeight() / 2) - centery;
+		// update position
+		GUI.boardpanel.setLocation(posx, posy);
+		GUI.boardpanel.repaint();
 	}
 }
